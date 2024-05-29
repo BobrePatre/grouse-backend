@@ -59,8 +59,8 @@
       "type": "object",
       "properties": {
         "telegramId": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
+          "format": "int64",
           "description": "Id пользователя в телеграм, которого надо оповестить в тексте",
           "title": "Telegram Id"
         },

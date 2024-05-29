@@ -36,7 +36,7 @@ message NotifyInTextRq {
     }
   };
 
-  int32 telegram_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  int64 telegram_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     title: "Telegram Id",
     description: "Id пользователя в телеграм, которого надо оповестить в тексте"
   }];

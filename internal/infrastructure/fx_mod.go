@@ -4,6 +4,7 @@ import (
 	"github.com/BobrePatre/grouse-backend/internal/infrastructure/grpc"
 	"github.com/BobrePatre/grouse-backend/internal/infrastructure/http"
 	"github.com/BobrePatre/grouse-backend/internal/infrastructure/logging"
+	"github.com/BobrePatre/grouse-backend/internal/infrastructure/telegram"
 	"github.com/BobrePatre/grouse-backend/internal/infrastructure/validate"
 	"go.uber.org/fx"
 	"log/slog"
@@ -21,6 +22,12 @@ var Module = fx.Module(
 	fx.Provide(
 		logging.LoadConfig,
 		logging.Logger,
+	),
+
+	// Telegram
+	fx.Provide(
+		telegram.LoadConfig,
+		telegram.NewBot,
 	),
 
 	// Grpc

@@ -1,5 +1,8 @@
 {
   "logger": {
     "mode": "dev"
+  },
+  "telegram": {
+    "botToken": "6776917438:AAGlUDgFhyeSp3PfDK1PRYT73QH41aoXnNI"
   }
 }
