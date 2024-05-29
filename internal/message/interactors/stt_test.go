@@ -15,10 +15,6 @@ import (
 
 func TestSttInteractor_SendNotification(t *testing.T) {
 
-	var (
-		ctx = context.Background()
-	)
-
 	type fields struct {
 		notifications *mocks.MockNotificationGateway
 		logger        *slog.Logger
@@ -39,7 +35,7 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 		{
 			name: "successful notification",
 			args: args{
-				ctx: ctx,
+				ctx: context.Background(),
 				dto: dto.SendNotificationRequest{
 					ReciverId: 123,
 					Content:   "Test message",
@@ -60,7 +56,7 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 		{
 			name: "failed notification",
 			args: args{
-				ctx: ctx,
+				ctx: context.Background(),
 				dto: dto.SendNotificationRequest{
 					ReciverId: 123,
 					Content:   "Test message",
@@ -88,7 +84,6 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			// arrange
 			f := &fields{
 				notifications: mocks.NewMockNotificationGateway(ctrl),
 				logger:        slog.New(mocks2.NewMockHandler(ctrl)),
