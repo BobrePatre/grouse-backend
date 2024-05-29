@@ -28,6 +28,8 @@ var Module = fx.Module(
 	fx.Provide(
 		telegram.LoadConfig,
 		telegram.NewBot,
+		telegram.NewDispatcher,
+		telegram.NewUpdater,
 	),
 
 	// Grpc
@@ -49,6 +51,7 @@ var Module = fx.Module(
 
 	// Module Entrypoint
 	fx.Invoke(
+		telegram.StartPolling,
 		grpc.RunGrpcServer,
 		http.RunHttpServer,
 		func(logger *slog.Logger) {
