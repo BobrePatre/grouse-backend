@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"cleanArchitecture/internal/user/entity"
+	"github.com/BobrePatre/grouse-backend/internal/user/entity"
 )
 
 type UserRepository struct {

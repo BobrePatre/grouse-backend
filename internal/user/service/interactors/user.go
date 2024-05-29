@@ -1,8 +1,8 @@
 package interactors
 
 import (
-	"cleanArchitecture/internal/user/entity"
-	"cleanArchitecture/internal/user/service/dto"
+	"github.com/BobrePatre/grouse-backend/internal/user/entity"
+	"github.com/BobrePatre/grouse-backend/internal/user/service/dto"
 	"log/slog"
 )
 

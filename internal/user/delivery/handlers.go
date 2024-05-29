@@ -1,8 +1,8 @@
 package delivery
 
 import (
-	"cleanArchitecture/internal/user/service/dto"
-	"cleanArchitecture/internal/user/service/interactors"
+	"github.com/BobrePatre/grouse-backend/internal/user/service/dto"
+	"github.com/BobrePatre/grouse-backend/internal/user/service/interactors"
 	"github.com/labstack/echo/v4"
 	"net/http"
 )

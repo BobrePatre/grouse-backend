@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option go_package = "github.com/BobrePatre/grouse-backend/pkg/stt";
+
+import "google/protobuf/empty.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    version: "1.0.0",
+    title: "STT API",
+    description: "Описание запросов для Spech To Text"
+  }
+};
+
+service SttService {
+  rpc NotifyInText(NotifyInTextRq) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/notify/text"
+      body: "*"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Notify In Text",
+      description: "Отправить сообщение для отображения в тексте"
+    };
+  };
+}
+
+message NotifyInTextRq {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Text Notify Request",
+      description: "Оповещение пользователя текстом (для оповещения глухих пользователей)"
+    }
+  };
+
+  int32 telegram_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    title: "Telegram Id",
+    description: "Id пользователя в телеграм, которого надо оповестить в тексте"
+  }];
+  string body = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    title: "Message Body",
+    description: "Содержание оповещения"
+  }];
+}
+
+
+

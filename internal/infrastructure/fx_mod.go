@@ -1,11 +1,10 @@
 package infrastructure
 
 import (
-	"cleanArchitecture/internal/infrastructure/grpc"
-	"cleanArchitecture/internal/infrastructure/http"
-	"cleanArchitecture/internal/infrastructure/logging"
-	"cleanArchitecture/internal/infrastructure/redis"
-	"cleanArchitecture/internal/infrastructure/validate"
+	"github.com/BobrePatre/grouse-backend/internal/infrastructure/grpc"
+	"github.com/BobrePatre/grouse-backend/internal/infrastructure/http"
+	"github.com/BobrePatre/grouse-backend/internal/infrastructure/logging"
+	"github.com/BobrePatre/grouse-backend/internal/infrastructure/validate"
 	"go.uber.org/fx"
 	"log/slog"
 )
@@ -22,12 +21,6 @@ var Module = fx.Module(
 	fx.Provide(
 		logging.LoadConfig,
 		logging.Logger,
-	),
-
-	// Redis
-	fx.Provide(
-		redis.LoadConfig,
-		redis.NewClient,
 	),
 
 	// Grpc

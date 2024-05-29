@@ -1,8 +1,8 @@
 package main
 
 import (
-	"cleanArchitecture/internal/infrastructure"
-	"cleanArchitecture/internal/user"
+	"github.com/BobrePatre/grouse-backend/internal/infrastructure"
+	"github.com/BobrePatre/grouse-backend/internal/user"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 	"log/slog"

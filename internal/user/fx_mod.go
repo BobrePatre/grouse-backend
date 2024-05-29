@@ -1,9 +1,9 @@
 package user
 
 import (
-	"cleanArchitecture/internal/user/delivery"
-	"cleanArchitecture/internal/user/repository"
-	"cleanArchitecture/internal/user/service/interactors"
+	"github.com/BobrePatre/grouse-backend/internal/user/delivery"
+	"github.com/BobrePatre/grouse-backend/internal/user/repository"
+	"github.com/BobrePatre/grouse-backend/internal/user/service/interactors"
 	"go.uber.org/fx"
 	"log/slog"
 )
