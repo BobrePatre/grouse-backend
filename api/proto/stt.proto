@@ -18,7 +18,7 @@ service SttService {
   rpc NotifyInText(NotifyInTextRq) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/notify/text"
-      body: "*"
+      body: "*",
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
