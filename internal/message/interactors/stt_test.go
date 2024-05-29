@@ -99,6 +99,20 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 			err := oms.SendNotification(tt.args.ctx, tt.args.dto)
 
 			// assert
+			if tt.wantErr {
+				if assert.Error(t, err) {
+					t.Logf("expected error: %v", err)
+				} else {
+					t.Fatalf("expected an error but got none")
+				}
+			} else {
+				if assert.NoError(t, err) {
+					t.Log("notification sent successfully")
+				} else {
+					t.Fatalf("did not expect an error but got: %v", err)
+				}
+			}
+
 			if tt.assert != nil {
 				tt.assert(t, f, err)
 			}
