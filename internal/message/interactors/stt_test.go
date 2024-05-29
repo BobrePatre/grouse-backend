@@ -34,7 +34,7 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 		args    args
 		wantErr bool
 		on      func(*fields)
-		assert  func(*testing.T, *fields)
+		assert  func(*testing.T, *fields, error)
 	}{
 		{
 			name: "successful notification",
@@ -49,6 +49,13 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 			on: func(f *fields) {
 				f.notifications.EXPECT().Notify(gomock.Any(), gomock.Any()).Return(nil).Times(1)
 			},
+			assert: func(t *testing.T, f *fields, err error) {
+				if assert.NoError(t, err) {
+					t.Log("Successfully assert no error")
+				} else {
+					t.Fatal("Failed to assert error")
+				}
+			},
 		},
 		{
 			name: "failed notification",
@@ -62,6 +69,14 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 			wantErr: true,
 			on: func(f *fields) {
 				f.notifications.EXPECT().Notify(gomock.Any(), gomock.Any()).Return(errors.New("notification failed")).Times(1)
+			},
+			assert: func(t *testing.T, f *fields, err error) {
+				if assert.Error(t, err) && assert.Equal(t, "notification failed", err.Error()) {
+					t.Log("Successfully assert error")
+				} else {
+					t.Fatal("Failed to assert error")
+				}
+
 			},
 		},
 	}
@@ -104,7 +119,7 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 			}
 
 			if tt.assert != nil {
-				tt.assert(t, f)
+				tt.assert(t, f, err)
 			}
 		})
 	}
