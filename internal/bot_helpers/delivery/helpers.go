@@ -45,7 +45,9 @@ func (h *BotHelpersHandlers) Start(b *gotgbot.Bot, ctx *ext.Context) error {
 }
 
 func (h *BotHelpersHandlers) UserId(b *gotgbot.Bot, ctx *ext.Context) error {
-	_, err := b.SendMessage(ctx.EffectiveChat.Id, fmt.Sprintf("Ваш ID: %d", ctx.EffectiveChat.Id), nil)
+	_, err := b.SendMessage(ctx.EffectiveChat.Id, fmt.Sprintf("Ваш ID: `%d`", ctx.EffectiveChat.Id), &gotgbot.SendMessageOpts{
+		ParseMode: gotgbot.ParseModeMarkdown,
+	})
 	if err != nil {
 		return err
 	}
