@@ -3,9 +3,9 @@ package interactors
 import (
 	"context"
 	"errors"
-	mocks2 "github.com/BobrePatre/grouse-backend/internal/infrastructure/logging/mocks"
 	"github.com/BobrePatre/grouse-backend/internal/message/interactors/mocks"
 	"go.uber.org/mock/gomock"
+	"os"
 	"testing"
 
 	"github.com/BobrePatre/grouse-backend/internal/message/dto"
@@ -13,16 +13,16 @@ import (
 	"log/slog"
 )
 
-func TestSendSttNotification(t *testing.T) {
+func TestSendTtsNotification(t *testing.T) {
 
 	type fields struct {
-		notifications *mocks.MockNotificationSttGateway
+		notifications *mocks.MockNotificationTtsGateway
 		logger        *slog.Logger
 	}
 
 	type args struct {
 		ctx context.Context
-		dto dto.SendSttNotificationRequest
+		dto dto.SendTtsNotificationRequest
 	}
 
 	tests := []struct {
@@ -35,28 +35,28 @@ func TestSendSttNotification(t *testing.T) {
 			name: "successful notification",
 			args: args{
 				ctx: context.Background(),
-				dto: dto.SendSttNotificationRequest{
+				dto: dto.SendTtsNotificationRequest{
 					UserId:  123,
 					Content: "Test message",
 				},
 			},
 			wantErr: false,
 			on: func(f *fields) {
-				f.notifications.EXPECT().Notify(gomock.Any(), gomock.Any()).Return(nil).Times(1)
+				f.notifications.EXPECT().NotifyClient(gomock.Any(), gomock.Any()).Return(nil).Times(1)
 			},
 		},
 		{
 			name: "failed notification",
 			args: args{
 				ctx: context.Background(),
-				dto: dto.SendSttNotificationRequest{
+				dto: dto.SendTtsNotificationRequest{
 					UserId:  123,
 					Content: "Test message",
 				},
 			},
 			wantErr: true,
 			on: func(f *fields) {
-				f.notifications.EXPECT().Notify(gomock.Any(), gomock.Any()).Return(errors.New("notification failed")).Times(1)
+				f.notifications.EXPECT().NotifyClient(gomock.Any(), gomock.Any()).Return(errors.New("notification failed")).Times(1)
 			},
 		},
 	}
@@ -69,11 +69,11 @@ func TestSendSttNotification(t *testing.T) {
 			defer ctrl.Finish()
 
 			f := &fields{
-				notifications: mocks.NewMockNotificationSttGateway(ctrl),
-				logger:        slog.New(mocks2.NewMockHandler(ctrl)),
+				notifications: mocks.NewMockNotificationTtsGateway(ctrl),
+				logger:        slog.New(slog.NewJSONHandler(os.Stdout, nil)),
 			}
 
-			oms := NewSttInteractor(f.notifications, f.logger)
+			oms := NewTtsInteractor(f.logger, f.notifications)
 
 			if tt.on != nil {
 				tt.on(f)
