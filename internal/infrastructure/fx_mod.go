@@ -6,6 +6,7 @@ import (
 	"github.com/BobrePatre/grouse-backend/internal/infrastructure/logging"
 	"github.com/BobrePatre/grouse-backend/internal/infrastructure/telegram"
 	"github.com/BobrePatre/grouse-backend/internal/infrastructure/validate"
+	"github.com/BobrePatre/grouse-backend/internal/infrastructure/ws"
 	"go.uber.org/fx"
 	"log/slog"
 )
@@ -47,6 +48,11 @@ var Module = fx.Module(
 		http.LoadConfig,
 		http.NewGatewayServer,
 		http.NewHttpServer,
+	),
+
+	// WS
+	fx.Provide(
+		ws.NewUpgrader,
 	),
 
 	// Module Entrypoint

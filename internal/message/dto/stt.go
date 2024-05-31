@@ -1,8 +1,8 @@
 package dto
 
 type (
-	SendNotificationRequest struct {
-		ReciverId int64
-		Content   string
+	SendSttNotificationRequest struct {
+		UserId  int64  `json:"user_id"`
+		Content string `json:"content"`
 	}
 )

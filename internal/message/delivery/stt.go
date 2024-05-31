@@ -38,9 +38,9 @@ func RegisterSttHandlers(srv *grpc.Server, srvCfg *infraGrpc.Config, gtw *runtim
 }
 
 func (h *SttHandlers) NotifyInText(ctx context.Context, req *stt.NotifyInTextRq) (*emptypb.Empty, error) {
-	err := h.interactor.SendNotification(ctx, dto.SendNotificationRequest{
-		ReciverId: req.TelegramId,
-		Content:   req.Body,
+	err := h.interactor.SendNotification(ctx, dto.SendSttNotificationRequest{
+		UserId:  req.TelegramId,
+		Content: req.Body,
 	})
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to send notification: %v", err)

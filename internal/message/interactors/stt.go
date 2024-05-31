@@ -7,25 +7,25 @@ import (
 	"log/slog"
 )
 
-type NotificationGateway interface {
+type NotificationSttGateway interface {
 	Notify(ctx context.Context, notification *entity.Message) error
 }
 
 type SttInteractor struct {
-	notifications NotificationGateway
+	notifications NotificationSttGateway
 	logger        *slog.Logger
 }
 
-func NewSttInteractor(notificationGateway NotificationGateway, logger *slog.Logger) *SttInteractor {
+func NewSttInteractor(notificationGateway NotificationSttGateway, logger *slog.Logger) *SttInteractor {
 	return &SttInteractor{
 		notifications: notificationGateway,
 		logger:        logger,
 	}
 }
 
-func (i *SttInteractor) SendNotification(ctx context.Context, dto dto.SendNotificationRequest) error {
+func (i *SttInteractor) SendNotification(ctx context.Context, dto dto.SendSttNotificationRequest) error {
 	notification := entity.NewMessage(
-		dto.ReciverId,
+		dto.UserId,
 		dto.Content,
 	)
 	err := i.notifications.Notify(ctx, notification)

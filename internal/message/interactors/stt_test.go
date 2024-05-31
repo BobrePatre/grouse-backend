@@ -22,7 +22,7 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 
 	type args struct {
 		ctx context.Context
-		dto dto.SendNotificationRequest
+		dto dto.SendSttNotificationRequest
 	}
 
 	tests := []struct {
@@ -35,9 +35,9 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 			name: "successful notification",
 			args: args{
 				ctx: context.Background(),
-				dto: dto.SendNotificationRequest{
-					ReciverId: 123,
-					Content:   "Test message",
+				dto: dto.SendSttNotificationRequest{
+					UserId:  123,
+					Content: "Test message",
 				},
 			},
 			wantErr: false,
@@ -49,9 +49,9 @@ func TestSttInteractor_SendNotification(t *testing.T) {
 			name: "failed notification",
 			args: args{
 				ctx: context.Background(),
-				dto: dto.SendNotificationRequest{
-					ReciverId: 123,
-					Content:   "Test message",
+				dto: dto.SendSttNotificationRequest{
+					UserId:  123,
+					Content: "Test message",
 				},
 			},
 			wantErr: true,

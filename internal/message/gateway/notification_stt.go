@@ -7,22 +7,22 @@ import (
 	"log/slog"
 )
 
-type NotificationGateway struct {
+type NotificationSttGateway struct {
 	tgBot  *gotgbot.Bot
 	logger *slog.Logger
 }
 
-func NewNotificationGateway(tgBot *gotgbot.Bot, logger *slog.Logger) *NotificationGateway {
-	return &NotificationGateway{
+func NewNotificationSttGateway(tgBot *gotgbot.Bot, logger *slog.Logger) *NotificationSttGateway {
+	return &NotificationSttGateway{
 		tgBot:  tgBot,
 		logger: logger,
 	}
 }
 
-func (g NotificationGateway) Notify(ctx context.Context, notification *entity.Message) error {
+func (g NotificationSttGateway) Notify(ctx context.Context, notification *entity.Message) error {
 
 	_, err := g.tgBot.SendMessage(
-		notification.ReciverId,
+		notification.UserId,
 		notification.Body,
 		nil,
 	)
